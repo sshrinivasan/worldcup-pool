@@ -976,12 +976,12 @@ export const matches = [
 ];
 
 export const friends = [
-  "Siddharth",
+  "Sid",
   "Alex",
-  "Jordan",
-  "Sam",
-  "Taylor",
-  "Morgan",
+  "Kevin",
+  "Stewart",
+  "John",
+  "Marc",
   // Add more friends below:
   // "Your Friend Name",
 ];
