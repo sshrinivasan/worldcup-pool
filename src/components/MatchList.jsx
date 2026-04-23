@@ -88,7 +88,7 @@ const MatchList = ({ matches, currentUser }) => {
       {displayedStages.map((stage) => (
         <div key={stage} className="stage-group">
           <h2 className="stage-title">{stage}</h2>
-          <div className="matches-grid">
+          <div className="matches-list">
             {groupedMatches[stage].map((match) => (
               <MatchCard key={match.id} match={match} currentUser={currentUser} />
             ))}

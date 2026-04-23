@@ -11,6 +11,7 @@ export const savePrediction = async (matchId, user, prediction) => {
         result: prediction.result,
         team1_score: prediction.score.team1,
         team2_score: prediction.score.team2,
+        extra_time: prediction.extraTime ?? false,
         updated_at: new Date().toISOString()
       }, {
         onConflict: 'match_id,user_name'
@@ -47,6 +48,7 @@ export const getPrediction = async (matchId, user) => {
         team1: data.team1_score,
         team2: data.team2_score
       },
+      extraTime: data.extra_time ?? false,
       timestamp: data.created_at
     };
   } catch (error) {
@@ -75,6 +77,7 @@ export const getAllPredictions = async () => {
           team1: row.team1_score,
           team2: row.team2_score
         },
+        extraTime: row.extra_time ?? false,
         timestamp: row.created_at
       };
     });
@@ -103,6 +106,7 @@ export const getPredictionsByMatch = async (matchId) => {
         team1: row.team1_score,
         team2: row.team2_score
       },
+      extraTime: row.extra_time ?? false,
       timestamp: row.created_at
     }));
   } catch (error) {
