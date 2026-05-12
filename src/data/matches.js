@@ -993,6 +993,7 @@ export const friends = [
   "Dan",
   "Prajwal",
   "Rob",
+  "Devan",
   "🐕 Benny",
   "🐕 Chester",
   "🐕 Islay",
