@@ -2,22 +2,34 @@ import React, { useState, useEffect } from 'react';
 import { matches, friends } from '../data/matches';
 import { getAllPredictions } from '../utils/storage';
 import { getAllActualResults } from '../utils/actualResults';
+import { getAllKnockoutTeamAssignments } from '../utils/knockoutTeams';
 
 const AllPredictions = () => {
   const [allPredictions, setAllPredictions] = useState({});
   const [actualResults, setActualResults] = useState({});
+  const [knockoutAssignments, setKnockoutAssignments] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
-      const predictions = await getAllPredictions();
-      const results = await getAllActualResults();
+      const [predictions, results, assignments] = await Promise.all([
+        getAllPredictions(),
+        getAllActualResults(),
+        getAllKnockoutTeamAssignments(),
+      ]);
       setAllPredictions(predictions);
       setActualResults(results);
+      setKnockoutAssignments(assignments);
       setLoading(false);
     };
     loadData();
   }, []);
+
+  const resolveMatch = (match) => {
+    const assignment = knockoutAssignments[match.id];
+    if (!assignment) return match;
+    return { ...match, team1: assignment.team1, team2: assignment.team2 };
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -112,13 +124,15 @@ const AllPredictions = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {matchesWithPredictions.map((match) => (
+                  {matchesWithPredictions.map((match) => {
+                    const resolved = resolveMatch(match);
+                    return (
                     <tr key={match.id}>
                       <td className="match-cell">
                         <div className="match-info-compact">
                           <span className="match-date-compact">{formatDate(match.date)}</span>
                           <span className="match-teams-compact">
-                            {match.team1.flag} {match.team1.code} vs {match.team2.flag} {match.team2.code}
+                            {resolved.team1.flag} {resolved.team1.code} vs {resolved.team2.flag} {resolved.team2.code}
                           </span>
                         </div>
                       </td>
@@ -130,7 +144,12 @@ const AllPredictions = () => {
                           <td key={friend} className="prediction-cell-compact">
                             {prediction ? (
                               <div className={`prediction-tile ${colorClass}`}>
-                                {prediction.score.team1} - {prediction.score.team2}
+                                {(() => {
+                                  const s1 = prediction.score.team1;
+                                  const s2 = prediction.score.team2;
+                                  const et = prediction.extraTime;
+                                  return `${s1}${et && s1 > s2 ? '*' : ''}–${s2}${et && s2 > s1 ? '*' : ''}`;
+                                })()}
                               </div>
                             ) : (
                               <div className="prediction-tile empty">-</div>
@@ -139,7 +158,8 @@ const AllPredictions = () => {
                         );
                       })}
                     </tr>
-                  ))}
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

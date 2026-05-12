@@ -63,10 +63,59 @@ function HomePage({ onEnter }) {
           </button>
 
           <div className="pool-rules-box">
-            <h2 className="rules-title">Pool Rules</h2>
+            <h2 className="rules-title">📋 Pool Rules</h2>
             <div className="rules-content">
-              <p>Edit this section to add your pool rules.</p>
-              <p>You can modify the rules in the HomePage.jsx file.</p>
+
+              <p className="rules-welcome">
+                Welcome to Ted Lasso's 2026 World Cup Pool! Whether you're a die-hard football fan or just here for the banter, everyone's got a shot. Pick your scores, follow the tournament, and may the best predictor win. 🏆
+              </p>
+
+              <div className="rules-section">
+                <h3>💰 Entry & Prizes</h3>
+                <ul>
+                  <li>Entry fee: <strong>$20 per person</strong> (payment details to follow)</li>
+                  <li><strong>1st place</strong> takes home <strong>75%</strong> of the pot</li>
+                  <li><strong>2nd place</strong> takes home <strong>25%</strong> of the pot</li>
+                </ul>
+              </div>
+
+              <div className="rules-section">
+                <h3>📝 Making Predictions</h3>
+                <ul>
+                  <li>Predict the scoreline for each match — the result (win/draw/loss) is derived automatically from your score</li>
+                  <li>For knockout rounds, check the <strong>Pens</strong> box if you think the match goes to a penalty shootout — enter the score as if the winning team scored one more (e.g. 2–1 with Pens checked means you're predicting it was 1–1 before penalties, and your team won the shootout)</li>
+                  <li>Predictions lock when each stage begins, so get them in early!</li>
+                  <li>Don't stress about the whole tournament upfront — <strong>you can submit fresh predictions after each stage</strong> for the next round, so no one falls behind just for joining late</li>
+                </ul>
+              </div>
+
+              <div className="rules-section">
+                <h3>🧮 Scoring System</h3>
+                <table className="scoring-table">
+                  <thead>
+                    <tr>
+                      <th>Stage</th>
+                      <th>Correct Result</th>
+                      <th>Exact Score Bonus*</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Group Stage</td><td>1 pt</td><td>+0.5 pt</td></tr>
+                    <tr><td>Round of 32</td><td>2 pts</td><td>+1 pt</td></tr>
+                    <tr><td>Round of 16</td><td>3 pts</td><td>+1.5 pts</td></tr>
+                    <tr><td>Quarterfinal</td><td>4 pts</td><td>+2 pts</td></tr>
+                    <tr><td>Semifinal</td><td>5 pts</td><td>+2.5 pts</td></tr>
+                    <tr><td>Third Place</td><td>5 pts</td><td>+2.5 pts</td></tr>
+                    <tr><td>Final</td><td>6 pts</td><td>+3 pts</td></tr>
+                  </tbody>
+                </table>
+                <p className="rules-note">* Exact score bonus in knockout rounds requires both the correct scoreline <em>and</em> the correct Pens prediction. A 2–1 win and a 2*–1 penalty win are treated as different scores.</p>
+              </div>
+
+              <p className="rules-footer">
+                Good luck, have fun, and remember — "Be curious, not judgmental." ⚽
+              </p>
+
             </div>
           </div>
         </div>

@@ -678,8 +678,8 @@ body {
 }
 
 .legend-color.orange {
-  background: linear-gradient(135deg, #ff9800, #ffa726);
-  border-color: #ff9800;
+  background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+  border-color: #c8e6c9;
 }
 
 .legend-color.red {
@@ -820,9 +820,9 @@ body {
 }
 
 .prediction-tile.prediction-correct-outcome {
-  background: #ff9800;
-  color: white;
-  border-color: #f57c00;
+  background: #c8e6c9;
+  color: #1b5e20;
+  border-color: #81c784;
 }
 
 .prediction-tile.prediction-incorrect {
@@ -971,7 +971,7 @@ body {
 
 .knockout-manager-button {
   padding: 12px 20px;
-  background: #ff9800;
+  background: #0066B2;
   color: white;
   border: none;
   border-radius: 8px;
@@ -983,7 +983,7 @@ body {
 }
 
 .knockout-manager-button:hover {
-  background: #f57c00;
+  background: #4caf50;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
 }
@@ -1437,6 +1437,54 @@ body {
   font-size: 1.3rem;
 }
 
+/* Compact 3-column breakdown grid */
+.breakdown-compact-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+  margin-bottom: 16px;
+}
+
+.breakdown-compact-card {
+  border-radius: 6px;
+  padding: 5px 7px;
+  border: 2px solid transparent;
+  font-size: 0.68rem;
+  line-height: 1.5;
+}
+
+.breakdown-compact-card.prediction-correct-score {
+  background: #4caf50; color: white; border-color: #388e3c;
+}
+.breakdown-compact-card.prediction-correct-outcome {
+  background: #c8e6c9; color: #1b5e20; border-color: #81c784;
+}
+.breakdown-compact-card.prediction-incorrect {
+  background: #f44336; color: white; border-color: #d32f2f;
+}
+
+.breakdown-compact-teams {
+  font-weight: 700;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.72rem;
+}
+
+.breakdown-compact-scores {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-size: 0.65rem;
+  opacity: 0.95;
+}
+
+.breakdown-compact-pts {
+  font-weight: 700;
+  margin-top: 2px;
+}
+
 .breakdown-matches {
   display: grid;
   gap: 15px;
@@ -1475,7 +1523,8 @@ body {
 }
 
 .breakdown-points.one-point {
-  background: #ff9800;
+  background: #c8e6c9;
+  color: #1b5e20;
 }
 
 .breakdown-points.two-points {
@@ -1505,7 +1554,7 @@ body {
 }
 
 .breakdown-prediction {
-  border-left: 4px solid #ff9800;
+  border-left: 4px solid #c8e6c9;
 }
 
 .breakdown-actual {
@@ -1566,7 +1615,7 @@ body {
 }
 
 .breakdown-card.correct-outcome {
-  border-color: #ff9800;
+  border-color: #c8e6c9;
   background: linear-gradient(to bottom, #fff8f0, white);
 }
 
@@ -1608,7 +1657,8 @@ body {
 }
 
 .breakdown-points-badge.one-point {
-  background: #ff9800;
+  background: #c8e6c9;
+  color: #1b5e20;
 }
 
 .breakdown-points-badge.two-points {
@@ -1701,9 +1751,9 @@ body {
 }
 
 .prediction-cell.prediction-correct-outcome {
-  background: linear-gradient(135deg, #ff9800, #ffa726);
-  color: white;
-  border: 2px solid #ff9800;
+  background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+  color: #1b5e20;
+  border: 2px solid #81c784;
 }
 
 .prediction-cell.prediction-incorrect {

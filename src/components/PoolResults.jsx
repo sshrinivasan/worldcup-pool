@@ -69,19 +69,28 @@ const PoolResults = () => {
     });
   };
 
-  // Group breakdown by stage
+  const STAGE_ORDER = [
+    'Final', 'Third Place', 'Semifinal', 'Quarterfinal',
+    'Round of 16', 'Round of 32',
+    'Group A', 'Group B', 'Group C', 'Group D', 'Group E', 'Group F',
+    'Group G', 'Group H', 'Group I', 'Group J', 'Group K', 'Group L',
+  ];
+
+  // Group breakdown by stage, sorted latest-to-earliest
   const groupBreakdownByStage = () => {
     const grouped = {};
     breakdown.forEach((item) => {
       const match = getMatchInfo(item.matchId);
       if (match) {
-        if (!grouped[match.stage]) {
-          grouped[match.stage] = [];
-        }
+        if (!grouped[match.stage]) grouped[match.stage] = [];
         grouped[match.stage].push({ ...item, match });
       }
     });
-    return grouped;
+    return Object.fromEntries(
+      Object.entries(grouped).sort(
+        ([a], [b]) => STAGE_ORDER.indexOf(a) - STAGE_ORDER.indexOf(b)
+      )
+    );
   };
 
   const [knockoutAssignments, setKnockoutAssignments] = useState({});
@@ -120,8 +129,8 @@ const PoolResults = () => {
         <div className="leaderboard-info">
           <p>Click on any player to see their detailed score breakdown</p>
           <p className="scoring-note">
-            <strong>Scoring:</strong> Placeholder logic active (1pt for correct outcome + 1pt for exact score).
-            You'll provide the exact scoring rules later.
+            <strong>Scoring:</strong> Group stage: 1pt outcome + 0.5pt exact score.
+            Knockout rounds: 2/3/4/5/6pt outcome + 1/1.5/2/2.5/3pt exact score (score + pens must both match for bonus).
           </p>
         </div>
 
@@ -171,63 +180,42 @@ const PoolResults = () => {
         {/* Detailed Breakdown */}
         {selectedUser && breakdown.length > 0 && (
           <div className="score-breakdown">
-            <h3>📋 Score Breakdown for {selectedUser}</h3>
+            <div className="predictions-header">
+              <h3>📋 Score Breakdown for {selectedUser}</h3>
+              <div className="predictions-legend">
+                <div className="legend-item">
+                  <div className="legend-color green"></div>
+                  <span>Correct Score & Outcome</span>
+                </div>
+                <div className="legend-item">
+                  <div className="legend-color orange"></div>
+                  <span>Correct Outcome Only</span>
+                </div>
+                <div className="legend-item">
+                  <div className="legend-color red"></div>
+                  <span>Incorrect Prediction</span>
+                </div>
+              </div>
+            </div>
             {Object.entries(groupBreakdownByStage()).map(([stage, stageItems]) => (
               <div key={stage} className="breakdown-stage-section">
                 <h4 className="breakdown-stage-header">{stage}</h4>
-                <div className="breakdown-matches-grid">
+                <div className="breakdown-compact-grid">
                   {stageItems.map((item) => {
                     const { match } = item;
-                    const cardClass = item.correctScore ? 'correct-score' :
-                                     item.correctOutcome ? 'correct-outcome' :
-                                     'incorrect';
-
+                    const colorClass = item.correctScore ? 'prediction-correct-score' :
+                                       item.correctOutcome ? 'prediction-correct-outcome' :
+                                       'prediction-incorrect';
+                    const fmt = (s1, s2, et) => `${s1}${et && s1 > s2 ? '*' : ''}–${s2}${et && s2 > s1 ? '*' : ''}`;
                     return (
-                      <div key={item.matchId} className={`breakdown-card ${cardClass}`}>
-                        <div className="breakdown-card-header">
-                          <span className="breakdown-card-date">{formatDate(match.date)} - {match.time}</span>
-                          <span className={`breakdown-points-badge ${item.points === 0 ? 'zero-points' : item.points === 1 ? 'one-point' : 'two-points'}`}>
-                            {item.points} pts
-                          </span>
+                      <div key={item.matchId} className={`breakdown-compact-card ${colorClass}`}>
+                        <div className="breakdown-compact-teams">
+                          {match.team1.flag} {match.team1.code} vs {match.team2.flag} {match.team2.code}
                         </div>
-
-                        <div className="breakdown-card-teams">
-                          <div className="team">
-                            <span className="team-flag">{match.team1.flag}</span>
-                            <span className="team-name">{match.team1.name}</span>
-                          </div>
-                          <div className="vs">VS</div>
-                          <div className="team">
-                            <span className="team-flag">{match.team2.flag}</span>
-                            <span className="team-name">{match.team2.name}</span>
-                          </div>
-                        </div>
-
-                        <div className="breakdown-card-venue">{match.venue}</div>
-
-                        <div className="breakdown-card-results">
-                          <div className="breakdown-result-row">
-                            <span className="result-label">Predicted:</span>
-                            <span className="result-score">
-                              {item.prediction.score.team1} - {item.prediction.score.team2}
-                            </span>
-                            <span className="result-outcome">
-                              {item.prediction.result === 'home' ? `${match.team1.code} Win` :
-                               item.prediction.result === 'draw' ? 'Draw' :
-                               `${match.team2.code} Win`}
-                            </span>
-                          </div>
-                          <div className="breakdown-result-row">
-                            <span className="result-label">Actual:</span>
-                            <span className="result-score">
-                              {item.actualResult.score.team1} - {item.actualResult.score.team2}
-                            </span>
-                            <span className="result-outcome">
-                              {item.actualResult.result === 'home' ? `${match.team1.code} Win` :
-                               item.actualResult.result === 'draw' ? 'Draw' :
-                               `${match.team2.code} Win`}
-                            </span>
-                          </div>
+                        <div className="breakdown-compact-scores">
+                          <div>Predicted: {fmt(item.prediction.score.team1, item.prediction.score.team2, item.prediction.extraTime)}</div>
+                          <div>Actual: {fmt(item.actualResult.score.team1, item.actualResult.score.team2, item.actualResult.extraTime)}</div>
+                          <div className="breakdown-compact-pts">{item.points}pt{item.points !== 1 ? 's' : ''}</div>
                         </div>
                       </div>
                     );

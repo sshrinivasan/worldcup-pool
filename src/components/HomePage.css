@@ -141,6 +141,82 @@
   margin: 10px 0;
 }
 
+.rules-welcome {
+  font-size: 0.95rem;
+  margin-bottom: 18px !important;
+}
+
+.rules-section {
+  margin: 18px 0;
+}
+
+.rules-section h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+}
+
+.rules-section ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.rules-section ul li {
+  font-size: 0.88rem;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.scoring-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 0.85rem;
+}
+
+.scoring-table th, .scoring-table td {
+  padding: 7px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.scoring-table thead tr {
+  background: #f5f7fa;
+}
+
+.scoring-table th {
+  font-weight: 700;
+  color: #2c3e50;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.scoring-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.scoring-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.rules-note {
+  font-size: 0.8rem !important;
+  color: #777 !important;
+  font-style: italic;
+  margin-top: 8px !important;
+}
+
+.rules-footer {
+  margin-top: 18px !important;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #555;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 14px;
+}
+
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 1024px) {
   .homepage-container {

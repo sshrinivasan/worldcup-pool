@@ -97,6 +97,11 @@ const MatchCard = ({ match, currentUser }) => {
       return;
     }
 
+    if (!isGroupStage() && extraTime && Math.abs(s1 - s2) !== 1) {
+      alert('When Pens is selected the score difference must be exactly 1 (e.g. 2–1 means it was 1–1 before penalties).');
+      return;
+    }
+
     const result = deriveResult(s1, s2);
     const prediction = {
       result,
@@ -169,7 +174,7 @@ const MatchCard = ({ match, currentUser }) => {
             disabled={isLocked}
             className="extra-time-checkbox"
           />
-          <span>ET/Pens</span>
+          <span>Pens</span>
         </label>
       )}
 

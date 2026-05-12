@@ -10,6 +10,7 @@ export const saveActualResult = async (matchId, result) => {
         result: result.result,
         team1_score: result.score.team1,
         team2_score: result.score.team2,
+        extra_time: result.extraTime ?? false,
         updated_at: new Date().toISOString()
       }, {
         onConflict: 'match_id'
@@ -43,6 +44,7 @@ export const getActualResult = async (matchId) => {
         team1: data.team1_score,
         team2: data.team2_score
       },
+      extraTime: data.extra_time ?? false,
       timestamp: data.created_at
     };
   } catch (error) {
@@ -69,6 +71,7 @@ export const getAllActualResults = async () => {
           team1: row.team1_score,
           team2: row.team2_score
         },
+        extraTime: row.extra_time ?? false,
         timestamp: row.created_at
       };
     });

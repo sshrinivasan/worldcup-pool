@@ -21,6 +21,7 @@ const AdminPanel = () => {
   const [result, setResult] = useState('');
   const [team1Score, setTeam1Score] = useState('');
   const [team2Score, setTeam2Score] = useState('');
+  const [extraTime, setExtraTime] = useState(false);
   const [filterStage, setFilterStage] = useState('all');
   const [showKnockoutManager, setShowKnockoutManager] = useState(false);
   const [showLockManager, setShowLockManager] = useState(false);
@@ -72,10 +73,12 @@ const AdminPanel = () => {
       setResult(existing.result);
       setTeam1Score(existing.score.team1);
       setTeam2Score(existing.score.team2);
+      setExtraTime(existing.extraTime ?? false);
     } else {
       setResult('');
       setTeam1Score('');
       setTeam2Score('');
+      setExtraTime(false);
     }
   };
 
@@ -95,12 +98,22 @@ const AdminPanel = () => {
       return;
     }
 
+    const isKnockout = !selectedMatch.stage.startsWith('Group');
+    const t1 = parseInt(team1Score);
+    const t2 = parseInt(team2Score);
+
+    if (isKnockout && extraTime && Math.abs(t1 - t2) !== 1) {
+      alert('When Pens is selected the score difference must be exactly 1 (e.g. 2–1 means it was 1–1 before penalties).');
+      return;
+    }
+
     const actualResult = {
       result,
       score: {
-        team1: parseInt(team1Score),
-        team2: parseInt(team2Score)
-      }
+        team1: t1,
+        team2: t2
+      },
+      extraTime: isKnockout ? extraTime : false,
     };
 
     try {
@@ -112,6 +125,7 @@ const AdminPanel = () => {
       setResult('');
       setTeam1Score('');
       setTeam2Score('');
+      setExtraTime(false);
     } catch (error) {
       alert('Error saving result. Please try again.');
       console.error(error);
@@ -174,6 +188,8 @@ const AdminPanel = () => {
 
   const hasResult = (matchId) => matchResults[matchId] != null;
   const getScore = (matchId) => matchResults[matchId]?.score;
+  const getExtraTime = (matchId) => matchResults[matchId]?.extraTime ?? false;
+  const fmtScore = (s1, s2, et) => `${s1}${et && s1 > s2 ? '*' : ''}–${s2}${et && s2 > s1 ? '*' : ''}`;
 
   const handleToggleLock = async (displayStage) => {
     try {
@@ -307,7 +323,7 @@ const AdminPanel = () => {
                   <span className="match-item-date">{formatDate(match.date)}</span>
                   {hasResult(match.id) && (
                     <span className="result-badge">
-                      ✓ {getScore(match.id).team1} – {getScore(match.id).team2}
+                      ✓ {fmtScore(getScore(match.id).team1, getScore(match.id).team2, getExtraTime(match.id))}
                     </span>
                   )}
                 </div>
@@ -355,41 +371,64 @@ const AdminPanel = () => {
                 <div className="venue-display">{selectedMatch.venue}</div>
               </div>
 
-              <div className="result-entry-section">
-                <label className="entry-label">Match Result:</label>
-                <div className="result-options-admin">
-                  <label className={`result-option-admin ${result === 'home' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      name="result"
-                      value="home"
-                      checked={result === 'home'}
-                      onChange={(e) => setResult(e.target.value)}
-                    />
-                    <span>{selectedMatch.team1.code} Win</span>
-                  </label>
-                  <label className={`result-option-admin ${result === 'draw' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      name="result"
-                      value="draw"
-                      checked={result === 'draw'}
-                      onChange={(e) => setResult(e.target.value)}
-                    />
-                    <span>Draw</span>
-                  </label>
-                  <label className={`result-option-admin ${result === 'away' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      name="result"
-                      value="away"
-                      checked={result === 'away'}
-                      onChange={(e) => setResult(e.target.value)}
-                    />
-                    <span>{selectedMatch.team2.code} Win</span>
-                  </label>
-                </div>
-              </div>
+              {(() => {
+                const isKnockout = !selectedMatch.stage.startsWith('Group');
+                return (
+                  <>
+                    <div className="result-entry-section">
+                      <label className="entry-label">Match Result:</label>
+                      <div className="result-options-admin">
+                        <label className={`result-option-admin ${result === 'home' ? 'selected' : ''}`}>
+                          <input
+                            type="radio"
+                            name="result"
+                            value="home"
+                            checked={result === 'home'}
+                            onChange={(e) => setResult(e.target.value)}
+                          />
+                          <span>{selectedMatch.team1.code} Win</span>
+                        </label>
+                        {!isKnockout && (
+                          <label className={`result-option-admin ${result === 'draw' ? 'selected' : ''}`}>
+                            <input
+                              type="radio"
+                              name="result"
+                              value="draw"
+                              checked={result === 'draw'}
+                              onChange={(e) => setResult(e.target.value)}
+                            />
+                            <span>Draw</span>
+                          </label>
+                        )}
+                        <label className={`result-option-admin ${result === 'away' ? 'selected' : ''}`}>
+                          <input
+                            type="radio"
+                            name="result"
+                            value="away"
+                            checked={result === 'away'}
+                            onChange={(e) => setResult(e.target.value)}
+                          />
+                          <span>{selectedMatch.team2.code} Win</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    {isKnockout && (
+                      <div className="result-entry-section">
+                        <label className="extra-time-label">
+                          <input
+                            type="checkbox"
+                            checked={extraTime}
+                            onChange={(e) => setExtraTime(e.target.checked)}
+                            className="extra-time-checkbox"
+                          />
+                          <span>Pens</span>
+                        </label>
+                      </div>
+                    )}
+                  </>
+                );
+              })()}
 
               <div className="result-entry-section">
                 <label className="entry-label">Final Score:</label>

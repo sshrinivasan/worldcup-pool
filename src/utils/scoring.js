@@ -1,40 +1,58 @@
-// Scoring calculation utilities
-
 import { getAllPredictions } from './storage';
 import { getAllActualResults } from './actualResults';
-import { friends } from '../data/matches';
+import { friends, matches } from '../data/matches';
 
-// Calculate points for a single prediction vs actual result
-// This is a placeholder - you'll provide the exact logic later
-export const calculateMatchPoints = (prediction, actualResult) => {
+const KNOCKOUT_POINTS = {
+  'Round of 32': { outcome: 2,   score: 1   },
+  'Round of 16': { outcome: 3,   score: 1.5 },
+  'Quarterfinal': { outcome: 4,  score: 2   },
+  'Semifinal':    { outcome: 5,  score: 2.5 },
+  'Third Place':  { outcome: 5,  score: 2.5 },
+  'Final':        { outcome: 6,  score: 3   },
+};
+
+const getStage = (matchId) => matches.find(m => m.id === matchId)?.stage ?? '';
+
+export const calculateMatchPoints = (prediction, actualResult, stage) => {
   if (!prediction || !actualResult) return { points: 0, correctOutcome: false, correctScore: false };
 
   let points = 0;
   let correctOutcome = false;
   let correctScore = false;
 
-  // PLACEHOLDER SCORING LOGIC
-  // Example: 1 point for correct outcome, 1 bonus point for exact score
+  if (stage.startsWith('Group')) {
+    // Group stage: 1pt correct outcome, 0.5pt bonus exact score
+    if (prediction.result === actualResult.result) {
+      points += 1;
+      correctOutcome = true;
+    }
+    if (prediction.score.team1 === actualResult.score.team1 &&
+        prediction.score.team2 === actualResult.score.team2) {
+      points += 0.5;
+      correctScore = true;
+    }
+  } else {
+    // Knockout: outcome points for correct winner (pens irrelevant for outcome)
+    // Score bonus requires matching scoreline AND matching pens flag
+    const { outcome: outcomePoints, score: scorePoints } = KNOCKOUT_POINTS[stage] ?? { outcome: 2, score: 1 };
 
-  // Check if outcome is correct (home win, draw, or away win)
-  if (prediction.result === actualResult.result) {
-    points += 1; // Correct outcome
-    correctOutcome = true;
-  }
+    if (prediction.result === actualResult.result) {
+      points += outcomePoints;
+      correctOutcome = true;
+    }
 
-  // Check if exact score is correct
-  if (
-    prediction.score.team1 === actualResult.score.team1 &&
-    prediction.score.team2 === actualResult.score.team2
-  ) {
-    points += 1; // Exact score bonus
-    correctScore = true;
+    const pensMatch = (prediction.extraTime ?? false) === (actualResult.extraTime ?? false);
+    if (prediction.score.team1 === actualResult.score.team1 &&
+        prediction.score.team2 === actualResult.score.team2 &&
+        pensMatch) {
+      points += scorePoints;
+      correctScore = true;
+    }
   }
 
   return { points, correctOutcome, correctScore };
 };
 
-// Calculate total score for a specific user
 export const calculateUserScore = async (username) => {
   const allPredictions = await getAllPredictions();
   const allResults = await getAllActualResults();
@@ -44,12 +62,12 @@ export const calculateUserScore = async (username) => {
   let correctOutcomes = 0;
   let correctScores = 0;
 
-  // Get all predictions for this user
   Object.values(allPredictions).forEach((prediction) => {
     if (prediction.user === username) {
       const actualResult = allResults[prediction.matchId];
       if (actualResult) {
-        const result = calculateMatchPoints(prediction, actualResult);
+        const stage = getStage(prediction.matchId);
+        const result = calculateMatchPoints(prediction, actualResult, stage);
         totalPoints += result.points;
         if (result.correctOutcome) correctOutcomes++;
         if (result.correctScore) correctScores++;
@@ -58,36 +76,20 @@ export const calculateUserScore = async (username) => {
     }
   });
 
-  return {
-    totalPoints,
-    matchesScored,
-    correctOutcomes,
-    correctScores
-  };
+  return { totalPoints, matchesScored, correctOutcomes, correctScores };
 };
 
-// Get leaderboard with all users and their scores
 export const getLeaderboard = async () => {
   const leaderboardPromises = friends.map(async (friend) => {
     const { totalPoints, matchesScored, correctOutcomes, correctScores } = await calculateUserScore(friend);
-    return {
-      username: friend,
-      totalPoints,
-      matchesScored,
-      correctOutcomes,
-      correctScores
-    };
+    return { username: friend, totalPoints, matchesScored, correctOutcomes, correctScores };
   });
 
   const leaderboard = await Promise.all(leaderboardPromises);
-
-  // Sort by total points (descending)
   leaderboard.sort((a, b) => b.totalPoints - a.totalPoints);
-
   return leaderboard;
 };
 
-// Get detailed breakdown for a specific user (including matches with 0 points)
 export const getUserScoreBreakdown = async (username) => {
   const allPredictions = await getAllPredictions();
   const allResults = await getAllActualResults();
@@ -98,14 +100,15 @@ export const getUserScoreBreakdown = async (username) => {
     if (prediction.user === username) {
       const actualResult = allResults[prediction.matchId];
       if (actualResult) {
-        const result = calculateMatchPoints(prediction, actualResult);
+        const stage = getStage(prediction.matchId);
+        const result = calculateMatchPoints(prediction, actualResult, stage);
         breakdown.push({
           matchId: prediction.matchId,
           prediction,
           actualResult,
           points: result.points,
           correctOutcome: result.correctOutcome,
-          correctScore: result.correctScore
+          correctScore: result.correctScore,
         });
       }
     }
