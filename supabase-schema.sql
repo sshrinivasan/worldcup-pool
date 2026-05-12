@@ -11,6 +11,7 @@ CREATE TABLE predictions (
   result TEXT NOT NULL CHECK (result IN ('home', 'draw', 'away')),
   team1_score INTEGER NOT NULL CHECK (team1_score >= 0),
   team2_score INTEGER NOT NULL CHECK (team2_score >= 0),
+  extra_time BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   UNIQUE(match_id, user_name)
@@ -22,6 +23,7 @@ CREATE TABLE actual_results (
   result TEXT NOT NULL CHECK (result IN ('home', 'draw', 'away')),
   team1_score INTEGER NOT NULL CHECK (team1_score >= 0),
   team2_score INTEGER NOT NULL CHECK (team2_score >= 0),
+  extra_time BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
