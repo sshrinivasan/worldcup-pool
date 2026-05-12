@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getLeaderboard, getUserScoreBreakdown } from '../utils/scoring';
 import { matches } from '../data/matches';
 import { getAllActualResults } from '../utils/actualResults';
@@ -10,6 +10,7 @@ const PoolResults = () => {
   const [breakdown, setBreakdown] = useState([]);
   const [refreshKey, setRefreshKey] = useState(0);
   const [loading, setLoading] = useState(true);
+  const breakdownRef = useRef(null);
 
   // Load leaderboard on mount and when results change
   useEffect(() => {
@@ -38,6 +39,7 @@ const PoolResults = () => {
       setSelectedUser(username);
       const userBreakdown = await getUserScoreBreakdown(username);
       setBreakdown(userBreakdown);
+      setTimeout(() => breakdownRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
     }
   };
 
@@ -179,7 +181,7 @@ const PoolResults = () => {
 
         {/* Detailed Breakdown */}
         {selectedUser && breakdown.length > 0 && (
-          <div className="score-breakdown">
+          <div className="score-breakdown" ref={breakdownRef}>
             <div className="predictions-header">
               <h3>📋 Score Breakdown for {selectedUser}</h3>
               <div className="predictions-legend">
