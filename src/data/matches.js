@@ -994,6 +994,7 @@ export const friends = [
   "Prajwal",
   "Rob",
   "Devan",
+  "Jasper",
   "🐕 Benny",
   "🐕 Chester",
   "🐕 Islay",
