@@ -61,7 +61,8 @@ export const getAllPredictions = async () => {
   try {
     const { data, error } = await supabase
       .from('predictions')
-      .select('*');
+      .select('*')
+      .limit(10000);
 
     if (error) throw error;
 
