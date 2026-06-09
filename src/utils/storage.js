@@ -59,16 +59,24 @@ export const getPrediction = async (matchId, user) => {
 
 export const getAllPredictions = async () => {
   try {
-    const { data, error } = await supabase
-      .from('predictions')
-      .select('*')
-      .limit(10000);
+    const PAGE_SIZE = 1000;
+    let allRows = [];
+    let from = 0;
 
-    if (error) throw error;
+    while (true) {
+      const { data, error } = await supabase
+        .from('predictions')
+        .select('*')
+        .range(from, from + PAGE_SIZE - 1);
 
-    // Convert to object format for compatibility
+      if (error) throw error;
+      allRows = allRows.concat(data);
+      if (data.length < PAGE_SIZE) break;
+      from += PAGE_SIZE;
+    }
+
     const predictions = {};
-    data.forEach(row => {
+    allRows.forEach(row => {
       const key = `${row.user_name}-${row.match_id}`;
       predictions[key] = {
         matchId: row.match_id,
