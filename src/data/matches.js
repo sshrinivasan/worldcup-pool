@@ -1,180 +1,181 @@
 // 2026 World Cup Match Schedule with Correct Groups
 // Based on the official FIFA draw from December 5, 2025
+// Dates and times in Pacific Time (PDT)
 
 export const matches = [
-  // ===== GROUP A: Mexico, South Korea, South Africa, Czechia =====
-  {
-    id: 1,
-    date: "2026-06-11",
-    time: "13:00",
-    stage: "Group A",
-    team1: { name: "Mexico", code: "MEX", flag: "🇲🇽" },
-    team2: { name: "South Korea", code: "KOR", flag: "🇰🇷" },
-    venue: "Estadio Azteca, Mexico City"
-  },
-  {
-    id: 2,
-    date: "2026-06-11",
-    time: "16:00",
-    stage: "Group A",
-    team1: { name: "South Africa", code: "RSA", flag: "🇿🇦" },
-    team2: { name: "Czechia", code: "CZE", flag: "🇨🇿" },
-    venue: "SoFi Stadium, Los Angeles"
-  },
+  // ===== GROUP A: Mexico, South Africa, South Korea, Czechia =====
   {
     id: 3,
-    date: "2026-06-17",
-    time: "13:00",
+    date: "2026-06-11",
+    time: "12:00",
     stage: "Group A",
     team1: { name: "Mexico", code: "MEX", flag: "🇲🇽" },
     team2: { name: "South Africa", code: "RSA", flag: "🇿🇦" },
-    venue: "Estadio BBVA, Monterrey"
+    venue: "Estadio Azteca, Mexico City"
   },
   {
     id: 4,
-    date: "2026-06-17",
-    time: "16:00",
+    date: "2026-06-11",
+    time: "19:00",
     stage: "Group A",
     team1: { name: "South Korea", code: "KOR", flag: "🇰🇷" },
-    team2: { name: "Czechia", code: "CZE", flag: "🇨🇿" },
-    venue: "AT&T Stadium, Dallas"
-  },
-  {
-    id: 5,
-    date: "2026-06-23",
-    time: "16:00",
-    stage: "Group A",
-    team1: { name: "Mexico", code: "MEX", flag: "🇲🇽" },
     team2: { name: "Czechia", code: "CZE", flag: "🇨🇿" },
     venue: "Estadio Guadalajara"
   },
   {
+    id: 2,
+    date: "2026-06-18",
+    time: "09:00",
+    stage: "Group A",
+    team1: { name: "South Africa", code: "RSA", flag: "🇿🇦" },
+    team2: { name: "Czechia", code: "CZE", flag: "🇨🇿" },
+    venue: "Mercedes-Benz Stadium, Atlanta"
+  },
+  {
+    id: 1,
+    date: "2026-06-18",
+    time: "18:00",
+    stage: "Group A",
+    team1: { name: "Mexico", code: "MEX", flag: "🇲🇽" },
+    team2: { name: "South Korea", code: "KOR", flag: "🇰🇷" },
+    venue: "Estadio Guadalajara"
+  },
+  {
+    id: 5,
+    date: "2026-06-24",
+    time: "18:00",
+    stage: "Group A",
+    team1: { name: "Mexico", code: "MEX", flag: "🇲🇽" },
+    team2: { name: "Czechia", code: "CZE", flag: "🇨🇿" },
+    venue: "Estadio Azteca, Mexico City"
+  },
+  {
     id: 6,
-    date: "2026-06-23",
-    time: "16:00",
+    date: "2026-06-24",
+    time: "18:00",
     stage: "Group A",
     team1: { name: "South Korea", code: "KOR", flag: "🇰🇷" },
     team2: { name: "South Africa", code: "RSA", flag: "🇿🇦" },
-    venue: "Rose Bowl, Los Angeles"
+    venue: "Estadio BBVA, Monterrey"
   },
 
   // ===== GROUP B: Canada, Switzerland, Qatar, Bosnia-Herzegovina =====
   {
-    id: 7,
+    id: 11,
     date: "2026-06-12",
-    time: "13:00",
+    time: "12:00",
     stage: "Group B",
     team1: { name: "Canada", code: "CAN", flag: "🇨🇦" },
-    team2: { name: "Switzerland", code: "SUI", flag: "🇨🇭" },
+    team2: { name: "Bosnia-Herzegovina", code: "BIH", flag: "🇧🇦" },
     venue: "BMO Field, Toronto"
   },
   {
-    id: 8,
-    date: "2026-06-12",
-    time: "16:00",
+    id: 12,
+    date: "2026-06-13",
+    time: "12:00",
     stage: "Group B",
-    team1: { name: "Qatar", code: "QAT", flag: "🇶🇦" },
+    team1: { name: "Switzerland", code: "SUI", flag: "🇨🇭" },
+    team2: { name: "Qatar", code: "QAT", flag: "🇶🇦" },
+    venue: "Levi's Stadium, San Francisco Bay Area"
+  },
+  {
+    id: 10,
+    date: "2026-06-18",
+    time: "12:00",
+    stage: "Group B",
+    team1: { name: "Switzerland", code: "SUI", flag: "🇨🇭" },
     team2: { name: "Bosnia-Herzegovina", code: "BIH", flag: "🇧🇦" },
-    venue: "MetLife Stadium, New York/New Jersey"
+    venue: "SoFi Stadium, Los Angeles"
   },
   {
     id: 9,
     date: "2026-06-18",
-    time: "13:00",
+    time: "15:00",
     stage: "Group B",
     team1: { name: "Canada", code: "CAN", flag: "🇨🇦" },
     team2: { name: "Qatar", code: "QAT", flag: "🇶🇦" },
     venue: "BC Place, Vancouver"
   },
   {
-    id: 10,
-    date: "2026-06-18",
-    time: "16:00",
-    stage: "Group B",
-    team1: { name: "Switzerland", code: "SUI", flag: "🇨🇭" },
-    team2: { name: "Bosnia-Herzegovina", code: "BIH", flag: "🇧🇦" },
-    venue: "Lincoln Financial Field, Philadelphia"
-  },
-  {
-    id: 11,
+    id: 7,
     date: "2026-06-24",
-    time: "16:00",
+    time: "12:00",
     stage: "Group B",
     team1: { name: "Canada", code: "CAN", flag: "🇨🇦" },
-    team2: { name: "Bosnia-Herzegovina", code: "BIH", flag: "🇧🇦" },
-    venue: "Gillette Stadium, Boston"
+    team2: { name: "Switzerland", code: "SUI", flag: "🇨🇭" },
+    venue: "BC Place, Vancouver"
   },
   {
-    id: 12,
+    id: 8,
     date: "2026-06-24",
-    time: "16:00",
+    time: "12:00",
     stage: "Group B",
-    team1: { name: "Switzerland", code: "SUI", flag: "🇨🇭" },
-    team2: { name: "Qatar", code: "QAT", flag: "🇶🇦" },
-    venue: "Arrowhead Stadium, Kansas City"
+    team1: { name: "Qatar", code: "QAT", flag: "🇶🇦" },
+    team2: { name: "Bosnia-Herzegovina", code: "BIH", flag: "🇧🇦" },
+    venue: "Lumen Field, Seattle"
   },
 
   // ===== GROUP C: Brazil, Morocco, Haiti, Scotland =====
   {
     id: 13,
-    date: "2026-06-12",
-    time: "19:00",
+    date: "2026-06-13",
+    time: "15:00",
     stage: "Group C",
     team1: { name: "Brazil", code: "BRA", flag: "🇧🇷" },
     team2: { name: "Morocco", code: "MAR", flag: "🇲🇦" },
-    venue: "SoFi Stadium, Los Angeles"
+    venue: "MetLife Stadium, New York/New Jersey"
   },
   {
     id: 14,
     date: "2026-06-13",
-    time: "13:00",
+    time: "18:00",
     stage: "Group C",
     team1: { name: "Haiti", code: "HAI", flag: "🇭🇹" },
     team2: { name: "Scotland", code: "SCO", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿" },
-    venue: "Hard Rock Stadium, Miami"
-  },
-  {
-    id: 15,
-    date: "2026-06-19",
-    time: "13:00",
-    stage: "Group C",
-    team1: { name: "Brazil", code: "BRA", flag: "🇧🇷" },
-    team2: { name: "Haiti", code: "HAI", flag: "🇭🇹" },
-    venue: "NRG Stadium, Houston"
+    venue: "Gillette Stadium, Boston"
   },
   {
     id: 16,
     date: "2026-06-19",
-    time: "16:00",
+    time: "15:00",
     stage: "Group C",
     team1: { name: "Morocco", code: "MAR", flag: "🇲🇦" },
     team2: { name: "Scotland", code: "SCO", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿" },
-    venue: "Mercedes-Benz Stadium, Atlanta"
+    venue: "Gillette Stadium, Boston"
+  },
+  {
+    id: 15,
+    date: "2026-06-19",
+    time: "17:30",
+    stage: "Group C",
+    team1: { name: "Brazil", code: "BRA", flag: "🇧🇷" },
+    team2: { name: "Haiti", code: "HAI", flag: "🇭🇹" },
+    venue: "Lincoln Financial Field, Philadelphia"
   },
   {
     id: 17,
-    date: "2026-06-25",
-    time: "16:00",
+    date: "2026-06-24",
+    time: "15:00",
     stage: "Group C",
     team1: { name: "Brazil", code: "BRA", flag: "🇧🇷" },
     team2: { name: "Scotland", code: "SCO", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿" },
-    venue: "Levi's Stadium, San Francisco Bay Area"
+    venue: "Hard Rock Stadium, Miami"
   },
   {
     id: 18,
-    date: "2026-06-25",
-    time: "16:00",
+    date: "2026-06-24",
+    time: "15:00",
     stage: "Group C",
     team1: { name: "Morocco", code: "MAR", flag: "🇲🇦" },
     team2: { name: "Haiti", code: "HAI", flag: "🇭🇹" },
-    venue: "AT&T Stadium, Dallas"
+    venue: "Mercedes-Benz Stadium, Atlanta"
   },
 
   // ===== GROUP D: USA, Paraguay, Australia, Türkiye =====
   {
     id: 19,
-    date: "2026-06-13",
-    time: "16:00",
+    date: "2026-06-12",
+    time: "18:00",
     stage: "Group D",
     team1: { name: "USA", code: "USA", flag: "🇺🇸" },
     team2: { name: "Paraguay", code: "PAR", flag: "🇵🇾" },
@@ -183,54 +184,54 @@ export const matches = [
   {
     id: 20,
     date: "2026-06-13",
-    time: "19:00",
+    time: "21:00",
     stage: "Group D",
     team1: { name: "Australia", code: "AUS", flag: "🇦🇺" },
     team2: { name: "Türkiye", code: "TUR", flag: "🇹🇷" },
-    venue: "Lumen Field, Seattle"
+    venue: "BC Place, Vancouver"
   },
   {
     id: 21,
-    date: "2026-06-20",
-    time: "13:00",
+    date: "2026-06-19",
+    time: "12:00",
     stage: "Group D",
     team1: { name: "USA", code: "USA", flag: "🇺🇸" },
     team2: { name: "Australia", code: "AUS", flag: "🇦🇺" },
-    venue: "MetLife Stadium, New York/New Jersey"
+    venue: "Lumen Field, Seattle"
   },
   {
     id: 22,
-    date: "2026-06-20",
-    time: "16:00",
+    date: "2026-06-19",
+    time: "20:00",
     stage: "Group D",
     team1: { name: "Paraguay", code: "PAR", flag: "🇵🇾" },
     team2: { name: "Türkiye", code: "TUR", flag: "🇹🇷" },
-    venue: "Mercedes-Benz Stadium, Atlanta"
+    venue: "Levi's Stadium, San Francisco Bay Area"
   },
   {
     id: 23,
-    date: "2026-06-26",
-    time: "16:00",
+    date: "2026-06-25",
+    time: "19:00",
     stage: "Group D",
     team1: { name: "USA", code: "USA", flag: "🇺🇸" },
     team2: { name: "Türkiye", code: "TUR", flag: "🇹🇷" },
-    venue: "Hard Rock Stadium, Miami"
+    venue: "SoFi Stadium, Los Angeles"
   },
   {
     id: 24,
     date: "2026-06-26",
-    time: "16:00",
+    time: "19:00",
     stage: "Group D",
     team1: { name: "Paraguay", code: "PAR", flag: "🇵🇾" },
     team2: { name: "Australia", code: "AUS", flag: "🇦🇺" },
-    venue: "Arrowhead Stadium, Kansas City"
+    venue: "Levi's Stadium, San Francisco Bay Area"
   },
 
   // ===== GROUP E: Germany, Curaçao, Ivory Coast, Ecuador =====
   {
     id: 25,
     date: "2026-06-14",
-    time: "13:00",
+    time: "10:00",
     stage: "Group E",
     team1: { name: "Germany", code: "GER", flag: "🇩🇪" },
     team2: { name: "Curaçao", code: "CUW", flag: "🇨🇼" },
@@ -243,124 +244,124 @@ export const matches = [
     stage: "Group E",
     team1: { name: "Ivory Coast", code: "CIV", flag: "🇨🇮" },
     team2: { name: "Ecuador", code: "ECU", flag: "🇪🇨" },
-    venue: "Rose Bowl, Los Angeles"
+    venue: "Lincoln Financial Field, Philadelphia"
   },
   {
     id: 27,
-    date: "2026-06-21",
+    date: "2026-06-20",
     time: "13:00",
     stage: "Group E",
     team1: { name: "Germany", code: "GER", flag: "🇩🇪" },
     team2: { name: "Ivory Coast", code: "CIV", flag: "🇨🇮" },
-    venue: "MetLife Stadium, New York/New Jersey"
+    venue: "BMO Field, Toronto"
   },
   {
     id: 28,
-    date: "2026-06-21",
-    time: "16:00",
+    date: "2026-06-20",
+    time: "17:00",
     stage: "Group E",
     team1: { name: "Curaçao", code: "CUW", flag: "🇨🇼" },
     team2: { name: "Ecuador", code: "ECU", flag: "🇪🇨" },
-    venue: "AT&T Stadium, Dallas"
-  },
-  {
-    id: 29,
-    date: "2026-06-27",
-    time: "16:00",
-    stage: "Group E",
-    team1: { name: "Germany", code: "GER", flag: "🇩🇪" },
-    team2: { name: "Ecuador", code: "ECU", flag: "🇪🇨" },
-    venue: "Levi's Stadium, San Francisco Bay Area"
+    venue: "Arrowhead Stadium, Kansas City"
   },
   {
     id: 30,
-    date: "2026-06-27",
-    time: "16:00",
+    date: "2026-06-25",
+    time: "13:00",
     stage: "Group E",
     team1: { name: "Curaçao", code: "CUW", flag: "🇨🇼" },
     team2: { name: "Ivory Coast", code: "CIV", flag: "🇨🇮" },
-    venue: "Mercedes-Benz Stadium, Atlanta"
+    venue: "Lincoln Financial Field, Philadelphia"
+  },
+  {
+    id: 29,
+    date: "2026-06-25",
+    time: "13:00",
+    stage: "Group E",
+    team1: { name: "Germany", code: "GER", flag: "🇩🇪" },
+    team2: { name: "Ecuador", code: "ECU", flag: "🇪🇨" },
+    venue: "MetLife Stadium, New York/New Jersey"
   },
 
   // ===== GROUP F: Netherlands, Sweden, Tunisia, Japan =====
   {
-    id: 31,
-    date: "2026-06-14",
-    time: "19:00",
-    stage: "Group F",
-    team1: { name: "Netherlands", code: "NED", flag: "🇳🇱" },
-    team2: { name: "Sweden", code: "SWE", flag: "🇸🇪" },
-    venue: "Gillette Stadium, Boston"
-  },
-  {
-    id: 32,
-    date: "2026-06-15",
-    time: "13:00",
-    stage: "Group F",
-    team1: { name: "Tunisia", code: "TUN", flag: "🇹🇳" },
-    team2: { name: "Japan", code: "JPN", flag: "🇯🇵" },
-    venue: "Lincoln Financial Field, Philadelphia"
-  },
-  {
-    id: 33,
-    date: "2026-06-22",
-    time: "13:00",
-    stage: "Group F",
-    team1: { name: "Netherlands", code: "NED", flag: "🇳🇱" },
-    team2: { name: "Tunisia", code: "TUN", flag: "🇹🇳" },
-    venue: "Hard Rock Stadium, Miami"
-  },
-  {
-    id: 34,
-    date: "2026-06-22",
-    time: "16:00",
-    stage: "Group F",
-    team1: { name: "Sweden", code: "SWE", flag: "🇸🇪" },
-    team2: { name: "Japan", code: "JPN", flag: "🇯🇵" },
-    venue: "Levi's Stadium, San Francisco Bay Area"
-  },
-  {
     id: 35,
-    date: "2026-06-28",
-    time: "16:00",
+    date: "2026-06-14",
+    time: "13:00",
     stage: "Group F",
     team1: { name: "Netherlands", code: "NED", flag: "🇳🇱" },
     team2: { name: "Japan", code: "JPN", flag: "🇯🇵" },
-    venue: "Arrowhead Stadium, Kansas City"
+    venue: "AT&T Stadium, Dallas"
   },
   {
     id: 36,
-    date: "2026-06-28",
-    time: "16:00",
+    date: "2026-06-14",
+    time: "19:00",
     stage: "Group F",
     team1: { name: "Sweden", code: "SWE", flag: "🇸🇪" },
     team2: { name: "Tunisia", code: "TUN", flag: "🇹🇳" },
+    venue: "Estadio BBVA, Monterrey"
+  },
+  {
+    id: 31,
+    date: "2026-06-20",
+    time: "10:00",
+    stage: "Group F",
+    team1: { name: "Netherlands", code: "NED", flag: "🇳🇱" },
+    team2: { name: "Sweden", code: "SWE", flag: "🇸🇪" },
     venue: "NRG Stadium, Houston"
+  },
+  {
+    id: 32,
+    date: "2026-06-20",
+    time: "21:00",
+    stage: "Group F",
+    team1: { name: "Tunisia", code: "TUN", flag: "🇹🇳" },
+    team2: { name: "Japan", code: "JPN", flag: "🇯🇵" },
+    venue: "Estadio BBVA, Monterrey"
+  },
+  {
+    id: 33,
+    date: "2026-06-25",
+    time: "16:00",
+    stage: "Group F",
+    team1: { name: "Netherlands", code: "NED", flag: "🇳🇱" },
+    team2: { name: "Tunisia", code: "TUN", flag: "🇹🇳" },
+    venue: "Arrowhead Stadium, Kansas City"
+  },
+  {
+    id: 34,
+    date: "2026-06-25",
+    time: "16:00",
+    stage: "Group F",
+    team1: { name: "Sweden", code: "SWE", flag: "🇸🇪" },
+    team2: { name: "Japan", code: "JPN", flag: "🇯🇵" },
+    venue: "AT&T Stadium, Dallas"
   },
 
   // ===== GROUP G: Belgium, Egypt, Iran, New Zealand =====
   {
     id: 37,
     date: "2026-06-15",
-    time: "16:00",
+    time: "12:00",
     stage: "Group G",
     team1: { name: "Belgium", code: "BEL", flag: "🇧🇪" },
     team2: { name: "Egypt", code: "EGY", flag: "🇪🇬" },
-    venue: "AT&T Stadium, Dallas"
+    venue: "Lumen Field, Seattle"
   },
   {
     id: 38,
     date: "2026-06-15",
-    time: "19:00",
+    time: "18:00",
     stage: "Group G",
     team1: { name: "Iran", code: "IRN", flag: "🇮🇷" },
     team2: { name: "New Zealand", code: "NZL", flag: "🇳🇿" },
-    venue: "Lumen Field, Seattle"
+    venue: "SoFi Stadium, Los Angeles"
   },
   {
     id: 39,
-    date: "2026-06-22",
-    time: "19:00",
+    date: "2026-06-21",
+    time: "12:00",
     stage: "Group G",
     team1: { name: "Belgium", code: "BEL", flag: "🇧🇪" },
     team2: { name: "Iran", code: "IRN", flag: "🇮🇷" },
@@ -368,102 +369,102 @@ export const matches = [
   },
   {
     id: 40,
-    date: "2026-06-23",
-    time: "13:00",
+    date: "2026-06-21",
+    time: "18:00",
     stage: "Group G",
     team1: { name: "Egypt", code: "EGY", flag: "🇪🇬" },
     team2: { name: "New Zealand", code: "NZL", flag: "🇳🇿" },
-    venue: "MetLife Stadium, New York/New Jersey"
-  },
-  {
-    id: 41,
-    date: "2026-06-29",
-    time: "16:00",
-    stage: "Group G",
-    team1: { name: "Belgium", code: "BEL", flag: "🇧🇪" },
-    team2: { name: "New Zealand", code: "NZL", flag: "🇳🇿" },
-    venue: "Mercedes-Benz Stadium, Atlanta"
+    venue: "BC Place, Vancouver"
   },
   {
     id: 42,
-    date: "2026-06-29",
-    time: "16:00",
+    date: "2026-06-26",
+    time: "20:00",
     stage: "Group G",
     team1: { name: "Egypt", code: "EGY", flag: "🇪🇬" },
     team2: { name: "Iran", code: "IRN", flag: "🇮🇷" },
-    venue: "Rose Bowl, Los Angeles"
+    venue: "Lumen Field, Seattle"
+  },
+  {
+    id: 41,
+    date: "2026-06-27",
+    time: "20:00",
+    stage: "Group G",
+    team1: { name: "Belgium", code: "BEL", flag: "🇧🇪" },
+    team2: { name: "New Zealand", code: "NZL", flag: "🇳🇿" },
+    venue: "BC Place, Vancouver"
   },
 
   // ===== GROUP H: Spain, Cabo Verde, Saudi Arabia, Uruguay =====
   {
     id: 43,
-    date: "2026-06-16",
-    time: "13:00",
+    date: "2026-06-15",
+    time: "09:00",
     stage: "Group H",
     team1: { name: "Spain", code: "ESP", flag: "🇪🇸" },
     team2: { name: "Cabo Verde", code: "CPV", flag: "🇨🇻" },
-    venue: "Hard Rock Stadium, Miami"
+    venue: "Mercedes-Benz Stadium, Atlanta"
   },
   {
     id: 44,
-    date: "2026-06-16",
-    time: "16:00",
+    date: "2026-06-15",
+    time: "15:00",
     stage: "Group H",
     team1: { name: "Saudi Arabia", code: "KSA", flag: "🇸🇦" },
     team2: { name: "Uruguay", code: "URU", flag: "🇺🇾" },
-    venue: "Arrowhead Stadium, Kansas City"
+    venue: "Hard Rock Stadium, Miami"
   },
   {
     id: 45,
-    date: "2026-06-23",
-    time: "19:00",
+    date: "2026-06-21",
+    time: "09:00",
     stage: "Group H",
     team1: { name: "Spain", code: "ESP", flag: "🇪🇸" },
     team2: { name: "Saudi Arabia", code: "KSA", flag: "🇸🇦" },
-    venue: "MetLife Stadium, New York/New Jersey"
+    venue: "Mercedes-Benz Stadium, Atlanta"
   },
   {
     id: 46,
-    date: "2026-06-24",
-    time: "13:00",
+    date: "2026-06-21",
+    time: "15:00",
     stage: "Group H",
     team1: { name: "Cabo Verde", code: "CPV", flag: "🇨🇻" },
     team2: { name: "Uruguay", code: "URU", flag: "🇺🇾" },
-    venue: "SoFi Stadium, Los Angeles"
-  },
-  {
-    id: 47,
-    date: "2026-06-30",
-    time: "16:00",
-    stage: "Group H",
-    team1: { name: "Spain", code: "ESP", flag: "🇪🇸" },
-    team2: { name: "Uruguay", code: "URU", flag: "🇺🇾" },
-    venue: "NRG Stadium, Houston"
+    venue: "Hard Rock Stadium, Miami"
   },
   {
     id: 48,
-    date: "2026-06-30",
-    time: "16:00",
+    date: "2026-06-26",
+    time: "17:00",
     stage: "Group H",
     team1: { name: "Cabo Verde", code: "CPV", flag: "🇨🇻" },
     team2: { name: "Saudi Arabia", code: "KSA", flag: "🇸🇦" },
-    venue: "Levi's Stadium, San Francisco Bay Area"
+    venue: "NRG Stadium, Houston"
+  },
+  {
+    id: 47,
+    date: "2026-06-27",
+    time: "17:00",
+    stage: "Group H",
+    team1: { name: "Spain", code: "ESP", flag: "🇪🇸" },
+    team2: { name: "Uruguay", code: "URU", flag: "🇺🇾" },
+    venue: "Estadio Guadalajara"
   },
 
   // ===== GROUP I: France, Senegal, Iraq, Norway =====
   {
     id: 49,
     date: "2026-06-16",
-    time: "19:00",
+    time: "12:00",
     stage: "Group I",
     team1: { name: "France", code: "FRA", flag: "🇫🇷" },
     team2: { name: "Senegal", code: "SEN", flag: "🇸🇳" },
-    venue: "Mercedes-Benz Stadium, Atlanta"
+    venue: "MetLife Stadium, New York/New Jersey"
   },
   {
     id: 50,
-    date: "2026-06-17",
-    time: "13:00",
+    date: "2026-06-16",
+    time: "15:00",
     stage: "Group I",
     team1: { name: "Iraq", code: "IRQ", flag: "🇮🇶" },
     team2: { name: "Norway", code: "NOR", flag: "🇳🇴" },
@@ -471,91 +472,91 @@ export const matches = [
   },
   {
     id: 51,
-    date: "2026-06-24",
-    time: "19:00",
+    date: "2026-06-22",
+    time: "14:00",
     stage: "Group I",
     team1: { name: "France", code: "FRA", flag: "🇫🇷" },
     team2: { name: "Iraq", code: "IRQ", flag: "🇮🇶" },
-    venue: "Rose Bowl, Los Angeles"
+    venue: "Lincoln Financial Field, Philadelphia"
   },
   {
     id: 52,
-    date: "2026-06-25",
-    time: "13:00",
+    date: "2026-06-22",
+    time: "17:00",
     stage: "Group I",
     team1: { name: "Senegal", code: "SEN", flag: "🇸🇳" },
     team2: { name: "Norway", code: "NOR", flag: "🇳🇴" },
-    venue: "Hard Rock Stadium, Miami"
+    venue: "MetLife Stadium, New York/New Jersey"
   },
   {
     id: 53,
-    date: "2026-07-01",
-    time: "16:00",
+    date: "2026-06-26",
+    time: "12:00",
     stage: "Group I",
     team1: { name: "France", code: "FRA", flag: "🇫🇷" },
     team2: { name: "Norway", code: "NOR", flag: "🇳🇴" },
-    venue: "AT&T Stadium, Dallas"
+    venue: "Gillette Stadium, Boston"
   },
   {
     id: 54,
-    date: "2026-07-01",
-    time: "16:00",
+    date: "2026-06-26",
+    time: "12:00",
     stage: "Group I",
     team1: { name: "Senegal", code: "SEN", flag: "🇸🇳" },
     team2: { name: "Iraq", code: "IRQ", flag: "🇮🇶" },
-    venue: "Lumen Field, Seattle"
+    venue: "BMO Field, Toronto"
   },
 
   // ===== GROUP J: Argentina, Algeria, Austria, Jordan =====
   {
     id: 55,
-    date: "2026-06-17",
-    time: "19:00",
+    date: "2026-06-16",
+    time: "18:00",
     stage: "Group J",
     team1: { name: "Argentina", code: "ARG", flag: "🇦🇷" },
     team2: { name: "Algeria", code: "ALG", flag: "🇩🇿" },
-    venue: "Hard Rock Stadium, Miami"
+    venue: "Arrowhead Stadium, Kansas City"
   },
   {
     id: 56,
-    date: "2026-06-18",
-    time: "13:00",
+    date: "2026-06-16",
+    time: "21:00",
     stage: "Group J",
     team1: { name: "Austria", code: "AUT", flag: "🇦🇹" },
     team2: { name: "Jordan", code: "JOR", flag: "🇯🇴" },
-    venue: "SoFi Stadium, Los Angeles"
+    venue: "Levi's Stadium, San Francisco Bay Area"
   },
   {
     id: 57,
-    date: "2026-06-25",
-    time: "19:00",
+    date: "2026-06-22",
+    time: "10:00",
     stage: "Group J",
     team1: { name: "Argentina", code: "ARG", flag: "🇦🇷" },
     team2: { name: "Austria", code: "AUT", flag: "🇦🇹" },
-    venue: "MetLife Stadium, New York/New Jersey"
+    venue: "AT&T Stadium, Dallas"
   },
   {
     id: 58,
-    date: "2026-06-26",
-    time: "13:00",
+    date: "2026-06-22",
+    time: "20:00",
     stage: "Group J",
     team1: { name: "Algeria", code: "ALG", flag: "🇩🇿" },
     team2: { name: "Jordan", code: "JOR", flag: "🇯🇴" },
-    venue: "NRG Stadium, Houston"
+    venue: "Levi's Stadium, San Francisco Bay Area"
   },
   {
     id: 59,
-    date: "2026-07-02",
-    time: "16:00",
+    date: "2026-06-27",
+    time: "19:00",
     stage: "Group J",
     team1: { name: "Argentina", code: "ARG", flag: "🇦🇷" },
     team2: { name: "Jordan", code: "JOR", flag: "🇯🇴" },
-    venue: "Mercedes-Benz Stadium, Atlanta"
+    venue: "AT&T Stadium, Dallas"
   },
   {
     id: 60,
-    date: "2026-07-02",
-    time: "16:00",
+    date: "2026-06-27",
+    time: "19:00",
     stage: "Group J",
     team1: { name: "Algeria", code: "ALG", flag: "🇩🇿" },
     team2: { name: "Austria", code: "AUT", flag: "🇦🇹" },
@@ -565,44 +566,44 @@ export const matches = [
   // ===== GROUP K: Portugal, DR Congo, Uzbekistan, Colombia =====
   {
     id: 61,
-    date: "2026-06-18",
-    time: "19:00",
+    date: "2026-06-17",
+    time: "10:00",
     stage: "Group K",
     team1: { name: "Portugal", code: "POR", flag: "🇵🇹" },
     team2: { name: "DR Congo", code: "COD", flag: "🇨🇩" },
-    venue: "Levi's Stadium, San Francisco Bay Area"
+    venue: "NRG Stadium, Houston"
   },
   {
     id: 62,
-    date: "2026-06-19",
-    time: "13:00",
+    date: "2026-06-17",
+    time: "19:00",
     stage: "Group K",
     team1: { name: "Uzbekistan", code: "UZB", flag: "🇺🇿" },
     team2: { name: "Colombia", code: "COL", flag: "🇨🇴" },
-    venue: "Arrowhead Stadium, Kansas City"
+    venue: "Estadio Azteca, Mexico City"
   },
   {
     id: 63,
-    date: "2026-06-26",
-    time: "19:00",
+    date: "2026-06-23",
+    time: "10:00",
     stage: "Group K",
     team1: { name: "Portugal", code: "POR", flag: "🇵🇹" },
     team2: { name: "Uzbekistan", code: "UZB", flag: "🇺🇿" },
-    venue: "AT&T Stadium, Dallas"
+    venue: "NRG Stadium, Houston"
   },
   {
     id: 64,
-    date: "2026-06-27",
-    time: "13:00",
+    date: "2026-06-23",
+    time: "19:00",
     stage: "Group K",
     team1: { name: "DR Congo", code: "COD", flag: "🇨🇩" },
     team2: { name: "Colombia", code: "COL", flag: "🇨🇴" },
-    venue: "MetLife Stadium, New York/New Jersey"
+    venue: "Estadio Guadalajara"
   },
   {
     id: 65,
-    date: "2026-07-03",
-    time: "16:00",
+    date: "2026-06-27",
+    time: "16:30",
     stage: "Group K",
     team1: { name: "Portugal", code: "POR", flag: "🇵🇹" },
     team2: { name: "Colombia", code: "COL", flag: "🇨🇴" },
@@ -610,68 +611,68 @@ export const matches = [
   },
   {
     id: 66,
-    date: "2026-07-03",
-    time: "16:00",
+    date: "2026-06-27",
+    time: "16:30",
     stage: "Group K",
     team1: { name: "DR Congo", code: "COD", flag: "🇨🇩" },
     team2: { name: "Uzbekistan", code: "UZB", flag: "🇺🇿" },
-    venue: "Gillette Stadium, Boston"
+    venue: "Mercedes-Benz Stadium, Atlanta"
   },
 
   // ===== GROUP L: England, Croatia, Ghana, Panama =====
   {
     id: 67,
-    date: "2026-06-19",
-    time: "19:00",
+    date: "2026-06-17",
+    time: "13:00",
     stage: "Group L",
     team1: { name: "England", code: "ENG", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
     team2: { name: "Croatia", code: "CRO", flag: "🇭🇷" },
-    venue: "NRG Stadium, Houston"
+    venue: "AT&T Stadium, Dallas"
   },
   {
     id: 68,
-    date: "2026-06-20",
-    time: "13:00",
+    date: "2026-06-17",
+    time: "16:00",
     stage: "Group L",
     team1: { name: "Ghana", code: "GHA", flag: "🇬🇭" },
     team2: { name: "Panama", code: "PAN", flag: "🇵🇦" },
-    venue: "Mercedes-Benz Stadium, Atlanta"
+    venue: "BMO Field, Toronto"
   },
   {
     id: 69,
-    date: "2026-06-27",
-    time: "19:00",
+    date: "2026-06-23",
+    time: "13:00",
     stage: "Group L",
     team1: { name: "England", code: "ENG", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
     team2: { name: "Ghana", code: "GHA", flag: "🇬🇭" },
-    venue: "SoFi Stadium, Los Angeles"
+    venue: "Gillette Stadium, Boston"
   },
   {
     id: 70,
-    date: "2026-06-28",
-    time: "13:00",
+    date: "2026-06-23",
+    time: "16:00",
     stage: "Group L",
     team1: { name: "Croatia", code: "CRO", flag: "🇭🇷" },
     team2: { name: "Panama", code: "PAN", flag: "🇵🇦" },
-    venue: "Hard Rock Stadium, Miami"
+    venue: "BMO Field, Toronto"
   },
   {
     id: 71,
-    date: "2026-07-04",
-    time: "16:00",
+    date: "2026-06-27",
+    time: "14:00",
     stage: "Group L",
     team1: { name: "England", code: "ENG", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
     team2: { name: "Panama", code: "PAN", flag: "🇵🇦" },
-    venue: "Levi's Stadium, San Francisco Bay Area"
+    venue: "MetLife Stadium, New York/New Jersey"
   },
   {
     id: 72,
-    date: "2026-07-04",
-    time: "16:00",
+    date: "2026-06-27",
+    time: "14:00",
     stage: "Group L",
     team1: { name: "Croatia", code: "CRO", flag: "🇭🇷" },
     team2: { name: "Ghana", code: "GHA", flag: "🇬🇭" },
-    venue: "Lumen Field, Seattle"
+    venue: "Lincoln Financial Field, Philadelphia"
   },
 
   // ===== ROUND OF 32 (16 matches) =====
