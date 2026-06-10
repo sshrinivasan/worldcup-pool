@@ -831,6 +831,20 @@ body {
   border-color: #d32f2f;
 }
 
+.coverage-summary {
+  grid-column: 1 / -1;
+  font-size: 0.82rem;
+  padding: 4px 0 2px 36px;
+}
+
+.coverage-complete {
+  color: #276a3f;
+}
+
+.coverage-missing {
+  color: #8a4a00;
+}
+
 .predictions-hidden-message {
   padding: 20px 24px;
   margin: 8px 0 16px;

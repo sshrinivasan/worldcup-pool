@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { friends, matches } from '../data/matches';
+import { getAllPredictions } from '../utils/storage';
+
+const getMatchIdsForDisplayStage = (displayStage) => {
+  if (displayStage === 'Group Stages') {
+    return matches.filter(m => m.stage.startsWith('Group')).map(m => m.id);
+  }
+  return matches.filter(m => m.stage === displayStage).map(m => m.id);
+};
 
 const VisibilityManager = ({ onClose, displayStages, isDisplayStageVisible, onToggle, onShowAll, onHideAll }) => {
   const [stageStates, setStageStates] = useState({});
+  const [allPredictions, setAllPredictions] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const reload = async () => {
@@ -13,7 +23,10 @@ const VisibilityManager = ({ onClose, displayStages, isDisplayStageVisible, onTo
     setLoading(false);
   };
 
-  useEffect(() => { reload(); }, []);
+  useEffect(() => {
+    reload();
+    getAllPredictions().then(setAllPredictions);
+  }, []);
 
   const handleToggle = async (stage) => {
     await onToggle(stage);
@@ -23,6 +36,21 @@ const VisibilityManager = ({ onClose, displayStages, isDisplayStageVisible, onTo
 
   const handleShowAll = async () => { await onShowAll(); await reload(); };
   const handleHideAll = async () => { await onHideAll(); await reload(); };
+
+  const getCoverage = (displayStage) => {
+    if (!allPredictions) return null;
+    const matchIds = getMatchIdsForDisplayStage(displayStage);
+    if (matchIds.length === 0) return null;
+
+    const missing = [];
+    for (const user of friends) {
+      const count = matchIds.filter(id => allPredictions[`${user}-${id}`]).length;
+      if (count < matchIds.length) {
+        missing.push({ user, count, total: matchIds.length });
+      }
+    }
+    return { total: matchIds.length, allComplete: missing.length === 0, missing };
+  };
 
   if (loading) {
     return (
@@ -59,6 +87,7 @@ const VisibilityManager = ({ onClose, displayStages, isDisplayStageVisible, onTo
           <div className="lock-stages-list">
             {displayStages.map((stage) => {
               const visible = stageStates[stage] === true;
+              const coverage = getCoverage(stage);
               return (
                 <div key={stage} className={`lock-stage-item ${visible ? 'unlocked' : 'locked'}`}>
                   <div className="lock-stage-info">
@@ -74,6 +103,20 @@ const VisibilityManager = ({ onClose, displayStages, isDisplayStageVisible, onTo
                   >
                     {visible ? 'Hide' : 'Reveal'}
                   </button>
+                  {coverage && (
+                    <div className="coverage-summary">
+                      {coverage.allComplete ? (
+                        <span className="coverage-complete">✓ All {friends.length} players submitted</span>
+                      ) : (
+                        <span className="coverage-missing">
+                          ⚠️ {coverage.missing.length} missing:{' '}
+                          {coverage.missing.map(({ user, count, total }) =>
+                            `${user} (${count}/${total})`
+                          ).join(', ')}
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}
