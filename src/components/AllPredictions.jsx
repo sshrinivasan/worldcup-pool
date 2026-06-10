@@ -3,23 +3,27 @@ import { matches, friends } from '../data/matches';
 import { getAllPredictions } from '../utils/storage';
 import { getAllActualResults } from '../utils/actualResults';
 import { getAllKnockoutTeamAssignments } from '../utils/knockoutTeams';
+import { getVisibleStages } from '../utils/visibilityManager';
 
 const AllPredictions = () => {
   const [allPredictions, setAllPredictions] = useState({});
   const [actualResults, setActualResults] = useState({});
   const [knockoutAssignments, setKnockoutAssignments] = useState({});
+  const [visibleStages, setVisibleStages] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
-      const [predictions, results, assignments] = await Promise.all([
+      const [predictions, results, assignments, visible] = await Promise.all([
         getAllPredictions(),
         getAllActualResults(),
         getAllKnockoutTeamAssignments(),
+        getVisibleStages(),
       ]);
       setAllPredictions(predictions);
       setActualResults(results);
       setKnockoutAssignments(assignments);
+      setVisibleStages(visible);
       setLoading(false);
     };
     loadData();
@@ -109,60 +113,68 @@ const AllPredictions = () => {
 
         if (matchesWithPredictions.length === 0) return null;
 
+        const isVisible = visibleStages.includes(stage);
+
         return (
           <div key={stage} className="predictions-stage-section">
             <h3 className="predictions-stage-title">{stage}</h3>
 
-            <div className="predictions-table-wrapper">
-              <table className="predictions-table">
-                <thead>
-                  <tr>
-                    <th className="match-column">Match</th>
-                    {friends.map(friend => (
-                      <th key={friend} className="player-column">{friend}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {matchesWithPredictions.map((match) => {
-                    const resolved = resolveMatch(match);
-                    return (
-                    <tr key={match.id}>
-                      <td className="match-cell">
-                        <div className="match-info-compact">
-                          <span className="match-date-compact">{formatDate(match.date)}</span>
-                          <span className="match-teams-compact">
-                            {resolved.team1.flag} {resolved.team1.code} vs {resolved.team2.flag} {resolved.team2.code}
-                          </span>
-                        </div>
-                      </td>
-                      {friends.map((friend) => {
-                        const prediction = getPredictionForUserAndMatch(match.id, friend);
-                        const colorClass = getColorClass(prediction, match.id);
-
-                        return (
-                          <td key={friend} className="prediction-cell-compact">
-                            {prediction ? (
-                              <div className={`prediction-tile ${colorClass}`}>
-                                {(() => {
-                                  const s1 = prediction.score.team1;
-                                  const s2 = prediction.score.team2;
-                                  const et = prediction.extraTime;
-                                  return `${s1}${et && s1 > s2 ? '*' : ''}–${s2}${et && s2 > s1 ? '*' : ''}`;
-                                })()}
-                              </div>
-                            ) : (
-                              <div className="prediction-tile empty">-</div>
-                            )}
-                          </td>
-                        );
-                      })}
+            {!isVisible ? (
+              <div className="predictions-hidden-message">
+                🔒 Predictions for this stage will be revealed once everyone has submitted
+              </div>
+            ) : (
+              <div className="predictions-table-wrapper">
+                <table className="predictions-table">
+                  <thead>
+                    <tr>
+                      <th className="match-column">Match</th>
+                      {friends.map(friend => (
+                        <th key={friend} className="player-column">{friend}</th>
+                      ))}
                     </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {matchesWithPredictions.map((match) => {
+                      const resolved = resolveMatch(match);
+                      return (
+                      <tr key={match.id}>
+                        <td className="match-cell">
+                          <div className="match-info-compact">
+                            <span className="match-date-compact">{formatDate(match.date)}</span>
+                            <span className="match-teams-compact">
+                              {resolved.team1.flag} {resolved.team1.code} vs {resolved.team2.flag} {resolved.team2.code}
+                            </span>
+                          </div>
+                        </td>
+                        {friends.map((friend) => {
+                          const prediction = getPredictionForUserAndMatch(match.id, friend);
+                          const colorClass = getColorClass(prediction, match.id);
+
+                          return (
+                            <td key={friend} className="prediction-cell-compact">
+                              {prediction ? (
+                                <div className={`prediction-tile ${colorClass}`}>
+                                  {(() => {
+                                    const s1 = prediction.score.team1;
+                                    const s2 = prediction.score.team2;
+                                    const et = prediction.extraTime;
+                                    return `${s1}${et && s1 > s2 ? '*' : ''}–${s2}${et && s2 > s1 ? '*' : ''}`;
+                                  })()}
+                                </div>
+                              ) : (
+                                <div className="prediction-tile empty">-</div>
+                              )}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         );
       })}

@@ -9,10 +9,18 @@ import {
   isDisplayStageLocked,
   toggleDisplayStageLock
 } from '../utils/lockManager';
+import {
+  getDisplayStages as getVisibilityDisplayStages,
+  isDisplayStageVisible,
+  toggleDisplayStageVisibility,
+  showAllStages,
+  hideAllStages,
+} from '../utils/visibilityManager';
 import { isAdminAuthenticated, authenticateAdmin, logoutAdmin } from '../utils/auth';
 import { getAllKnockoutTeamAssignments } from '../utils/knockoutTeams';
 import KnockoutManager from './KnockoutManager';
 import LockManager from './LockManager';
+import VisibilityManager from './VisibilityManager';
 import AdminLogin from './AdminLogin';
 
 const AdminPanel = () => {
@@ -25,6 +33,7 @@ const AdminPanel = () => {
   const [filterStage, setFilterStage] = useState('all');
   const [showKnockoutManager, setShowKnockoutManager] = useState(false);
   const [showLockManager, setShowLockManager] = useState(false);
+  const [showVisibilityManager, setShowVisibilityManager] = useState(false);
   const [refreshLocks, setRefreshLocks] = useState(0);
   const [knockoutAssignments, setKnockoutAssignments] = useState({});
 
@@ -261,6 +270,17 @@ const AdminPanel = () => {
         />
       )}
 
+      {showVisibilityManager && (
+        <VisibilityManager
+          onClose={() => setShowVisibilityManager(false)}
+          displayStages={getVisibilityDisplayStages()}
+          isDisplayStageVisible={isDisplayStageVisible}
+          onToggle={toggleDisplayStageVisibility}
+          onShowAll={showAllStages}
+          onHideAll={hideAllStages}
+        />
+      )}
+
       <div className="admin-panel">
         <div className="admin-header">
           <div className="admin-header-top">
@@ -280,6 +300,12 @@ const AdminPanel = () => {
                 onClick={() => setShowLockManager(true)}
               >
                 🔒 Lock/Unlock Predictions
+              </button>
+              <button
+                className="lock-manager-button"
+                onClick={() => setShowVisibilityManager(true)}
+              >
+                👁️ Reveal Predictions
               </button>
               <button
                 className="logout-button"

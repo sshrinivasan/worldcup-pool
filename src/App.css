@@ -831,6 +831,16 @@ body {
   border-color: #d32f2f;
 }
 
+.predictions-hidden-message {
+  padding: 20px 24px;
+  margin: 8px 0 16px;
+  background: #f8f4e8;
+  border: 1px solid #e0d4a8;
+  border-radius: 8px;
+  color: #7a6830;
+  font-size: 0.95rem;
+}
+
 .no-predictions {
   text-align: center;
   padding: 60px 20px;
