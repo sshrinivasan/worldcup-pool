@@ -646,6 +646,24 @@ body {
   gap: 5px;
 }
 
+.predictions-jump {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.predictions-jump label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+}
+
+.predictions-jump .stage-filter-select {
+  width: auto;
+  min-width: 180px;
+}
+
 /* New predictions legend with colors */
 .predictions-legend {
   display: flex;

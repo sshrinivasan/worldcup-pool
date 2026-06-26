@@ -75,6 +75,32 @@ const AllPredictions = () => {
     return acc;
   }, {});
 
+  const sectionId = (stage) => `predictions-section-${stage.replace(/\s+/g, '-')}`;
+
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Stages that actually have predictions to show, used to build the jump selector
+  const renderableStages = Object.entries(groupedMatches)
+    .filter(([, stageMatches]) =>
+      stageMatches.some(match =>
+        friends.some(friend => getPredictionForUserAndMatch(match.id, friend))
+      )
+    )
+    .map(([stage]) => stage);
+
+  // Build jump options: one consolidated "Group Stage", then each knockout stage
+  const navOptions = [];
+  const firstGroupStage = renderableStages.find(stage => stage.startsWith('Group'));
+  if (firstGroupStage) {
+    navOptions.push({ label: 'Group Stage', target: sectionId(firstGroupStage) });
+  }
+  renderableStages
+    .filter(stage => !stage.startsWith('Group'))
+    .forEach(stage => navOptions.push({ label: stage, target: sectionId(stage) }));
+
   if (loading) {
     return (
       <div className="all-predictions">
@@ -104,6 +130,24 @@ const AllPredictions = () => {
             <span>Incorrect Prediction</span>
           </div>
         </div>
+        {navOptions.length > 0 && (
+          <div className="predictions-jump">
+            <label htmlFor="predictions-jump-select">Jump to:</label>
+            <select
+              id="predictions-jump-select"
+              className="stage-filter-select"
+              defaultValue=""
+              onChange={(e) => {
+                if (e.target.value) scrollToSection(e.target.value);
+              }}
+            >
+              <option value="" disabled>Select a section…</option>
+              {navOptions.map(opt => (
+                <option key={opt.target} value={opt.target}>{opt.label}</option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       {Object.entries(groupedMatches).map(([stage, stageMatches]) => {
@@ -116,7 +160,7 @@ const AllPredictions = () => {
         const isVisible = visibleStages.includes(stage);
 
         return (
-          <div key={stage} className="predictions-stage-section">
+          <div key={stage} id={sectionId(stage)} className="predictions-stage-section">
             <h3 className="predictions-stage-title">{stage}</h3>
 
             {!isVisible ? (
@@ -141,7 +185,9 @@ const AllPredictions = () => {
                       <tr key={match.id}>
                         <td className="match-cell">
                           <div className="match-info-compact">
-                            <span className="match-date-compact">{formatDate(match.date)}</span>
+                            {stage.startsWith('Group') && (
+                              <span className="match-date-compact">{formatDate(match.date)}</span>
+                            )}
                             <span className="match-teams-compact">
                               {resolved.team1.flag} {resolved.team1.code} vs {resolved.team2.flag} {resolved.team2.code}
                             </span>

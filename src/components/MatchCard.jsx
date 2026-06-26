@@ -129,8 +129,12 @@ const MatchCard = ({ match, currentUser }) => {
   return (
     <div className={`match-row ${isLocked ? 'locked' : ''} ${saved ? 'row-saved' : ''}`}>
       <div className="row-meta">
-        <span className="row-date">{formatDate(match.date)}</span>
-        <span className="row-time">{match.time}</span>
+        {isGroupStage() && (
+          <>
+            <span className="row-date">{formatDate(match.date)}</span>
+            <span className="row-time">{match.time}</span>
+          </>
+        )}
         {isLocked && <span className="row-lock-badge">🔒</span>}
       </div>
 
