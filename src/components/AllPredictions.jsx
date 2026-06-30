@@ -4,6 +4,7 @@ import { getAllPredictions } from '../utils/storage';
 import { getAllActualResults } from '../utils/actualResults';
 import { getAllKnockoutTeamAssignments } from '../utils/knockoutTeams';
 import { getVisibleStages } from '../utils/visibilityManager';
+import { calculateMatchPoints } from '../utils/scoring';
 
 const AllPredictions = () => {
   const [allPredictions, setAllPredictions] = useState({});
@@ -48,17 +49,15 @@ const AllPredictions = () => {
     return allPredictions[key];
   };
 
-  const getColorClass = (prediction, matchId) => {
+  const getColorClass = (prediction, matchId, stage) => {
     if (!prediction) return '';
 
     const actual = actualResults[matchId];
     if (!actual) return ''; // No result yet
 
-    const correctScore =
-      prediction.score.team1 === actual.score.team1 &&
-      prediction.score.team2 === actual.score.team2;
-
-    const correctOutcome = prediction.result === actual.result;
+    // Use the same scoring logic as the leaderboard so colors match points
+    // (e.g. knockout exact-score requires the penalties flag to match too)
+    const { correctOutcome, correctScore } = calculateMatchPoints(prediction, actual, stage);
 
     if (correctScore) return 'prediction-correct-score'; // Green
     if (correctOutcome) return 'prediction-correct-outcome'; // Orange
@@ -195,7 +194,7 @@ const AllPredictions = () => {
                         </td>
                         {friends.map((friend) => {
                           const prediction = getPredictionForUserAndMatch(match.id, friend);
-                          const colorClass = getColorClass(prediction, match.id);
+                          const colorClass = getColorClass(prediction, match.id, stage);
 
                           return (
                             <td key={friend} className="prediction-cell-compact">
