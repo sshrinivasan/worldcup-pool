@@ -2088,6 +2088,55 @@ body {
   border-color: #0066B2;
 }
 
+.searchable-select {
+  position: relative;
+}
+
+.searchable-select-input {
+  width: 100%;
+  box-sizing: border-box;
+  cursor: text;
+}
+
+.searchable-select-options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  max-height: 260px;
+  overflow-y: auto;
+  background: white;
+  border: 2px solid #0066B2;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.searchable-select-option {
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.searchable-select-option.highlighted {
+  background: #e3f2fd;
+}
+
+.searchable-select-option.selected {
+  font-weight: 700;
+  color: #0066B2;
+}
+
+.searchable-select-empty {
+  padding: 10px 12px;
+  color: #999;
+  font-size: 0.95rem;
+}
+
 .vs-divider {
   text-align: center;
   font-weight: 700;

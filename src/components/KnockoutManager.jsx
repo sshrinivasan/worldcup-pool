@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { matches } from '../data/matches';
+import SearchableSelect from './SearchableSelect';
 import {
   getAllQualifiedTeams,
   saveKnockoutTeamAssignment,
@@ -217,42 +218,22 @@ const KnockoutManager = ({ onClose }) => {
                 <div className="team-selection-section">
                   <div className="team-selector">
                     <label>Team 1 (Home):</label>
-                    <select
-                      value={team1?.code || ''}
-                      onChange={(e) => {
-                        const selected = qualifiedTeams.find(t => t.code === e.target.value);
-                        setTeam1(selected);
-                      }}
-                      className="team-select"
-                    >
-                      <option value="">-- Select Team --</option>
-                      {qualifiedTeams.map((team) => (
-                        <option key={team.code} value={team.code}>
-                          {team.flag} {team.name} ({team.code})
-                        </option>
-                      ))}
-                    </select>
+                    <SearchableSelect
+                      teams={qualifiedTeams}
+                      value={team1}
+                      onChange={setTeam1}
+                    />
                   </div>
 
                   <div className="vs-divider">VS</div>
 
                   <div className="team-selector">
                     <label>Team 2 (Away):</label>
-                    <select
-                      value={team2?.code || ''}
-                      onChange={(e) => {
-                        const selected = qualifiedTeams.find(t => t.code === e.target.value);
-                        setTeam2(selected);
-                      }}
-                      className="team-select"
-                    >
-                      <option value="">-- Select Team --</option>
-                      {qualifiedTeams.map((team) => (
-                        <option key={team.code} value={team.code}>
-                          {team.flag} {team.name} ({team.code})
-                        </option>
-                      ))}
-                    </select>
+                    <SearchableSelect
+                      teams={qualifiedTeams}
+                      value={team2}
+                      onChange={setTeam2}
+                    />
                   </div>
                 </div>
 
